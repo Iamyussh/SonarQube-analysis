@@ -1,0 +1,21 @@
+name: SonarQube Scan
+
+on:
+  push:
+    branches: [ main ]   # Jab bhi main branch pe push hoga
+
+jobs:
+  sonarqube:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Run SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@v1.0.0
+        with:
+          projectBaseDir: .         # root of project
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: http://localhost:9000
