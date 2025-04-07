@@ -2,7 +2,7 @@ name: SonarQube Scan
 
 on:
   push:
-    branches: [ main ]   # Jab bhi main branch pe push hoga
+    branches: [ main ]
 
 jobs:
   sonarqube:
@@ -16,12 +16,12 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: '17'
-          distribution: 'adopt'
+          distribution: 'temurin'     # ✅ use 'temurin' instead of 'adopt'
 
       - name: Run SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v1.0.0
         with:
-          projectBaseDir: .         # root of project
+          projectBaseDir: .
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: https://aab5-43-254-163-109.ngrok-free.app/
